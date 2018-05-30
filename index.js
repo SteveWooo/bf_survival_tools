@@ -5,7 +5,6 @@ const request = require('request');
 const mysql = require('mysql');
 var mention = require('./modules/mention');
 
-const liveList = require('./live_list');
 const config = require('./config');
 
 function check(req){
@@ -62,13 +61,15 @@ function toSurvival(){
 	    ts += config.ahead * 24 * 60 * 60 * 1000;
 	    var time = new Date(parseInt(ts));
 
+	    delete require.cache[require.resolve('./live_list')]
+
 	    var req = {
 	    	query : {
 	    		year : time.getFullYear(),
 	        	month : time.getMonth() + 1,
 	        	day : time.getDate()
 	    	},
-	    	liveList : liveList
+	    	liveList : require('./live_list')
 	    }
 
 	    resolve(req);
@@ -84,7 +85,7 @@ function jobFun(){
 		if(!result){
 			console.log('empty');
 		} else {
-			mention(result);
+			// mention(result);
 		}
 	})
 	.catch(e=>{
