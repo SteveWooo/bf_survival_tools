@@ -92,8 +92,8 @@ function jobFun(){
 	})
 }
 
-jobFun();
-// new cron('0 0 12 * * *', jobFun, null, true, 'Asia/Chongqing');
+// jobFun();
+new cron('0 0 12 * * *', jobFun, null, true, 'Asia/Chongqing');
 
 /*
 { query: { year: 2018, month: 6, day: 4 },
