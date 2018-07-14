@@ -3,7 +3,8 @@ module.exports = {
     mail : {
         user : "461437874@qq.com",
         pass : "lyoko1234////",
-        nickName : "男友存活宝典"
+        nickName : "催命鬼",
+        mail_list : ['461437874@qq.com', '461437874@qq.com']
     },
     mysql : {
     	user : "stevewoo",

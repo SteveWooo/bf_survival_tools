@@ -75,21 +75,39 @@ function toSurvival(){
 	})
 }
 
-function jobFun(){
-	toSurvival().then(result=>{
-		return getDay(result);
-	}).then(result=>{
-		return check(result);
-	}).then(result=>{
-		if(!result){
-			console.log('empty');
-		} else {
-			mention(result);
+//考研倒计时
+function graduate_exam(){
+	const examination_time = 1545494400;
+	let now = Math.floor(+new Date()) / 1000;
+	let residue_time = Math.floor(examination_time - now);
+	let residue_day = Math.ceil(residue_time / (24*60*60));
+	let message = "睡你麻痹？还有：<br/><h1 style='color:red'>"+residue_day+"</h1>天就要考试了！！！";
+	let req = {
+		mention : {
+			subject : residue_day,
+			message : message
 		}
-	})
-	.catch(e=>{
-		console.log(e);
-	})
+	}
+
+	mention(req);
+}
+
+function jobFun(){
+	graduate_exam();
+	// toSurvival().then(result=>{
+	// 	return getDay(result);
+	// }).then(result=>{
+	// 	return check(result);
+	// }).then(result=>{
+	// 	if(!result){
+	// 		console.log('empty');
+	// 	} else {
+	// 		mention(result);
+	// 	}
+	// })
+	// .catch(e=>{
+	// 	console.log(e);
+	// })
 }
 
 // jobFun();
