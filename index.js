@@ -112,7 +112,7 @@ function jobFun(){
 	// })
 }
 
-jobFun();
+// jobFun();
 new cron('0 0 11 * * *', jobFun, null, true, 'Asia/Chongqing');
 
 /*

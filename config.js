@@ -4,7 +4,7 @@ module.exports = {
         user : "461437874@qq.com",
         pass : "lyoko1234////",
         nickName : "催命鬼",
-        mail_list : ['461437874@qq.com']
+        mail_list : ['461437874@qq.com', '707087965@qq.com']
     },
     mysql : {
     	user : "stevewoo",
