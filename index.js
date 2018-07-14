@@ -3,7 +3,10 @@ const express = require('express');
 const cron = require('cron').CronJob;
 const request = require('request');
 const mysql = require('mysql');
+const fs = require('fs');
 var mention = require('./modules/mention');
+
+require('./webapp');
 
 const liveList = require('./live_list');
 const config = require('./config');
@@ -81,14 +84,13 @@ function graduate_exam(){
 	let now = Math.floor(+new Date()) / 1000;
 	let residue_time = Math.floor(examination_time - now);
 	let residue_day = Math.ceil(residue_time / (24*60*60));
-	let message = "睡你麻痹？还有：<br/><h1 style='color:red'>"+residue_day+"</h1>天就要考试了！！！";
+	let message = fs.readFileSync('./message_module').toString().replace(/%%%residue_day%%%/g, residue_day);
 	let req = {
 		mention : {
 			subject : residue_day,
 			message : message
 		}
 	}
-
 	mention(req);
 }
 
@@ -110,8 +112,8 @@ function jobFun(){
 	// })
 }
 
-// jobFun();
-new cron('0 0 12 * * *', jobFun, null, true, 'Asia/Chongqing');
+jobFun();
+new cron('0 0 11 * * *', jobFun, null, true, 'Asia/Chongqing');
 
 /*
 { query: { year: 2018, month: 6, day: 4 },

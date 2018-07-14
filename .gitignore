@@ -1,2 +1,4 @@
 /node_modules
 package-lock.json
+message_module
+.DS_Store

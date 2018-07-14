@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor</title>
+    <link rel="stylesheet" type="text/css" href="./libs/wangEditor.min.css">
+    <style type="text/css">
+        #div1 {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        注意：%%%residue_day%%%为一个整体，不能仅修改其中部分，只能全部一起修改
+    </p>
+    <div id="div1">
+        <p>请输入内容...</p>
+    </div>
+    <button style="width:50px;height: 30px;line-height: 20px;background-color: #fff;border-radius: 20px;" onclick="upload()">上传</button>
+
+    <script type="text/javascript" src="./libs/jquery.min.js"></script>
+    <script type="text/javascript" src="./libs/wangEditor.min.js"></script>
+    <script type="text/javascript">
+        var config = {
+            base_url : "http://localhost:8081",
+            base_url : "http://cybergear-cn.com:8081"
+        }
+        var editor;
+        $(function () {
+            var E = window.wangEditor
+            editor = new E('#div1')
+            editor.customConfig.uploadImgShowBase64 = true
+            editor.create();
+            getMessage();
+        });
+
+        function getMessage(){
+            $.ajax({
+                url : config.base_url + "/get_message",
+                method : 'get',
+                success : function(res){
+                    res = typeof res == "string" ? JSON.parse(res) : res;
+                    editor.txt.html(res.message);
+                }
+            })
+        }
+
+        function upload(){
+            var data = editor.txt.html();
+            $.ajax({
+                url : config.base_url + "/set_message",
+                method : "post",
+                data : {
+                    html : data
+                },
+                success : function(res){
+                    console.log(res);
+                    alert("修改成功");
+                    location.reload();
+                }
+            })
+        }
+    </script>
+</body>
+</html>
