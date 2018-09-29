@@ -4,7 +4,7 @@ const config = require('./config.js');
 let app = express();
 var bodyParser = require('body-parser');//解析,用req.body获取post参数
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({limit: '50mb',extended: false}));
 app.use(express.static('static'));
 
 let default_message = "睡你麻痹？还有：<br><h1 style='color:red'>%%%residue_day%%%</h1>天就要考试了！！！";
