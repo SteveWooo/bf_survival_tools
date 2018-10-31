@@ -80,7 +80,7 @@ function toSurvival(){
 
 //考研倒计时
 function graduate_exam(){
-	const examination_time = 1545494400;
+	const examination_time = 1545408000;
 	let now = Math.floor(+new Date()) / 1000;
 	let residue_time = Math.floor(examination_time - now);
 	let residue_day = Math.ceil(residue_time / (24*60*60));
